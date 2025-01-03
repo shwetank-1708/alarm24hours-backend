@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
 
-const connect = async () => {
+const connection = async () => {
   try {
     await mongoose
       .connect(
-        "mongodb+srv://alarm24hours:shwetank.alarm24hours@cluster0.qniwp.mongodb.net/"
+        "mongodb+srv://alarm24hours:shwetank.alarm24hours@cluster0.qniwp.mongodb.net/alarm24hours"
       )
       .then(() => {
         console.log("Connected");
@@ -17,4 +17,4 @@ const connect = async () => {
   }
 };
 
-connect();
+connection();
