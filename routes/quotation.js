@@ -66,19 +66,24 @@ const express = require("express");
 const nodemailer = require("nodemailer");
 const PDFDocument = require("pdfkit");
 const fs = require("fs");
+const { console } = require("inspector/promises");
 
 const router = express.Router();
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: "shwetank.chauhan3@gmail.com", // Replace with your email
-    pass: "akjt fsiw kiwy pluj", // Replace with your app-specific password
+    user: "shwetank.chauhan17@gmail.com", // Replace with your email
+    pass: "zpjn zcba ydbi uxnc", // Replace with your app-specific password
   },
 });
 
 router.post("/send-email", async (req, res) => {
-  const { name, email, contactNum, message } = req.body;
+  console.log(req.body);
+  const { customerName, customerEmail, customerContactNum, customerMessage } =
+    req.body;
+
+  //   console.log(customerContactNum);
 
   // Generate PDF
   const pdfPath = `contact_form_${Date.now()}.pdf`;
@@ -88,17 +93,17 @@ router.post("/send-email", async (req, res) => {
 
   doc.fontSize(16).text("Contact Form Submission", { underline: true });
   doc.moveDown();
-  doc.fontSize(12).text(`Name: ${name}`);
-  doc.text(`Email: ${email}`);
-  doc.text(`Contact Number: ${contactNum}`);
-  doc.text(`Message: ${message}`);
+  doc.fontSize(12).text(`Name: ${customerName}`);
+  doc.text(`Email: ${customerEmail}`);
+  doc.text(`Contact Number: ${customerContactNum}`);
+  doc.text(`Message: ${customerMessage}`);
   doc.end();
 
   writeStream.on("finish", async () => {
     // Email options
     const mailOptions = {
-      from: "shwetank.chauhan3@gmail.com",
-      to: "shwetank.chauhan17@gmail.com", // Replace with the recipient email
+      from: "shwetank.chauhan17@gmail.com",
+      to: "shwetank.chauhan3@gmail.com", // Replace with the recipient email
       subject: "Contact Form Submission (PDF Attached)",
       text: "Please find the contact form submission details attached as a PDF.",
       attachments: [
