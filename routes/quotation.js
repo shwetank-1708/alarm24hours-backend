@@ -103,7 +103,8 @@ router.post("/send-email", async (req, res) => {
     // Email options
     const mailOptions = {
       from: "shwetank.chauhan17@gmail.com",
-      to: "shwetank.chauhan3@gmail.com", // Replace with the recipient email
+      // to: "shwetank.chauhan3@gmail.com", // Replace with the recipient email
+      to: `${customerEmail}`,
       subject: "Contact Form Submission (PDF Attached)",
       text: "Please find the contact form submission details attached as a PDF.",
       attachments: [
